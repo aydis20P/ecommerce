@@ -1,0 +1,75 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id="loginForm-wrapper">
+            <form id="loginForm">
+                <div id="login-info">
+                    <p class="font-weight-bold">Inicio de sesión</p>
+                    <hr>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="email" name="loginEmail" placeholder="Email...">
+                        </div>
+                    </div>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="loginPassword" placeholder="Contraseña...">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mx-auto" style="width: 150px;">
+                        <input id="formLogin-button" class="btn btn-success btn-block" type="submit" value="Iniciar sesión">
+                    </div>  
+                </div>
+            </form>
+        </div>
+
+        <br>
+
+        <div class="box-element" id="singupForm-wrapper">
+            <form id="singupForm">
+                <div id="singup-info">
+                    <p class="font-weight-bold">¿Aún no tienes cuenta?</p>
+                    <p class="font-weight-bold">Regístrate:</p>
+                    <hr>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="email" name="singupEmail" placeholder="Email...">
+                        </div>
+                    </div>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="singupName" placeholder="Nombre...">
+                        </div>
+                    </div>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="singupPassword" placeholder="Contraseña...">
+                        </div>
+                    </div>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input required class="form-control" type="text" name="singup2Password" placeholder="Confirma tu contraseña...">
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="font-weight-bold">¿Tienes un código de cuenta compartida? (Opcional)</p>
+                    <div class="mx-auto" style="width: 250px;">
+                        <div class="form-field">
+                            <input class="form-control" type="text" name="singupShareCode" placeholder="Código de cuenta compartida...">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="mx-auto" style="width: 150px;">
+                        <input id="formSingup-button" class="btn btn-success btn-block" type="submit" value="Registrarme">
+                    </div> 
+                </div>
+            </form>  
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

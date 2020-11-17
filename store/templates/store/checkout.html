@@ -2,6 +2,7 @@
 {% load static %}
 {% block content %}
     <div class="row">
+        {% comment %}
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
                 <form id="form">
@@ -41,7 +42,7 @@
             </div>
             
         </div>
-
+        {% endcomment %}
         <div class="col-lg-6">
             <div class="box-element">
                 <div class="box-element">
@@ -57,6 +58,10 @@
                     </div>
                     <h5>Productos:   2</h5>
                     <h5>Total:   $40</h5>
+                    <hr>
+                    <div class="mx-auto" style="width: 200px;">
+                        <a class="btn btn-danger" href="{% url 'store' %}">Finalizar pedido</a>
+                    </div>
                 </div>
             </div>
         </div>
