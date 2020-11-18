@@ -5,7 +5,8 @@
 <div class="row">
     <div class="col-lg-6">
         <div class="box-element" id="loginForm-wrapper">
-            <form id="loginForm">
+            <form id="loginForm" method="POST">
+                {% csrf_token %}
                 <div id="login-info">
                     <p class="font-weight-bold">Inicio de sesión</p>
                     <hr>
@@ -30,7 +31,8 @@
         <br>
 
         <div class="box-element" id="singupForm-wrapper">
-            <form id="singupForm">
+            <form id="singupForm" method="POST">
+                {% csrf_token %}
                 <div id="singup-info">
                     <p class="font-weight-bold">¿Aún no tienes cuenta?</p>
                     <p class="font-weight-bold">Regístrate:</p>
@@ -41,9 +43,11 @@
                         </div>
                     </div>
                     <div class="mx-auto" style="width: 250px;">
+                        {% comment %}
                         <div class="form-field">
                             <input required class="form-control" type="text" name="singupName" placeholder="Nombre...">
                         </div>
+                        {% endcomment %}
                     </div>
                     <div class="mx-auto" style="width: 250px;">
                         <div class="form-field">
