@@ -38,7 +38,7 @@ def loginSingup(request):
                     username = request.POST.get('singupEmail')
                     password = request.POST.get('singupPassword')
                     q1 = User.objects.filter(username=username)
-                    if q1 is None:
+                    if not q1:
                          user = User.objects.create_user(username, username, password)
                          user.save()
                     else:
