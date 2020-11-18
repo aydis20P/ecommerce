@@ -39,16 +39,27 @@ def loginSingup(request):
                          username = request.POST.get('singupEmail')
                          password = request.POST.get('singupPassword')
                          q1 = User.objects.filter(username=username)
-                         if not q1:
-                              user = User.objects.create_user(username, username, password)
-                              user.save()
-                         else:
-                              messages.info(request, "El e-mail ya está registrado!!!")
-                              return render(request, 'store/login.html')
                          if request.POST.get('singupShareCode'):
-                              customer = Customer(user=user, name=username, email=username, password=password, isPrimary=False, familyCode=request.POST.get('singupShareCode'))
-                              customer.save()
+                              q2 = Customer.objects.filter(familyCode=request.POST.get('singupShareCode'))
+                              if not q2:
+                                   messages.info(request, "El código compartido que ingresaste no existe!!!")
+                                   return render(request, 'store/login.html')
+                              else:
+                                   if not q1:
+                                        user = User.objects.create_user(username, username, password)
+                                        user.save()
+                                   else:
+                                        messages.info(request, "El e-mail ya está registrado!!!")
+                                        return render(request, 'store/login.html')
+                                   customer = Customer(user=user, name=username, email=username, password=password, isPrimary=False, familyCode=request.POST.get('singupShareCode'))
+                                   customer.save()
                          else:
+                              if not q1:
+                                   user = User.objects.create_user(username, username, password)
+                                   user.save()
+                              else:
+                                   messages.info(request, "El e-mail ya está registrado!!!")
+                                   return render(request, 'store/login.html')
                               customer = Customer(user=user, name=username, email=username, password=password, isPrimary=True, familyCode='codigoEjemplo')
                               customer.save()
                          login(request, user)
