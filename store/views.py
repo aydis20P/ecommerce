@@ -63,7 +63,10 @@ def loginSingup(request):
                               customer = Customer(user=user, name=username, email=username, password=password, isPrimary=True, familyCode='codigoEjemplo')
                               customer.save()
                          login(request, user)
-                         messages.info(request, "Registro exitoso!!!")
+                         if customer.isPrimary:
+                              messages.info(request, "¡Registro exitoso! | TU CÓDIGO COMPARTIDO ES: codigoEjemplo")
+                         else:
+                              messages.info(request, "¡Registro exitoso!")
                          return redirect('store')
                     else:
                          messages.info(request, "Las contraseñas no coinciden!!!")
