@@ -25,29 +25,36 @@ def loginSingup(request):
           if request.POST.get('loginEmail'):
                username = request.POST.get('loginEmail')
                password = request.POST.get('loginPassword')
-               try:
-                    user = authenticate(username=username, password=password)
+               user = authenticate(username=username, password=password)
+               if user is not None:
                     login(request, user)
                     messages.info(request, "Bienvenido!!!")
+                    return redirect('store')
+               else:
+                    messages.info(request, "Usuario y/o contraseña incorrecta(s)!!!")
                     return render(request, 'store/login.html')
-               except:
-                    messages.info(request, "No existe el usuario!!!")
           else:
                if request.POST.get('singupPassword') == request.POST.get('singup2Password'):
                     username = request.POST.get('singupEmail')
                     password = request.POST.get('singupPassword')
-                    user = User.objects.create_user(username, username, password)
-                    user.save()
+                    q1 = User.objects.filter(username=username)
+                    if q1 is None:
+                         user = User.objects.create_user(username, username, password)
+                         user.save()
+                    else:
+                         messages.info(request, "El e-mail ya está registrado!!!")
+                         return render(request, 'store/login.html')
                     if request.POST.get('singupShareCode'):
                          customer = Customer(user=user, name=username, email=username, password=password, isPrimary=False, familyCode=request.POST.get('singupShareCode'))
                          customer.save()
                     else:
-                         customer = Customer(user=user, name=username, email=username, password=password, isPrimary=True, familyCode='Código Ejemplo')
+                         customer = Customer(user=user, name=username, email=username, password=password, isPrimary=True, familyCode='codigoEjemplo')
                          customer.save()
                     login(request, user)
                     messages.info(request, "Registro exitoso!!!")
                     return redirect('store')
                else:
                     messages.info(request, "Las contraseñas no coinciden!!!")
+                    return render(request, 'store/login.html')
      else:
           return render(request, 'store/login.html')
